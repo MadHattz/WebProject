@@ -1,0 +1,53 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/main_nav.ejs %>
+
+<!-- Main Code-->
+<main>
+    <!-- Main Workout List Page displaying the current workouts entered into the database -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-10">
+                <h1><%= title %></h1>
+                <a href = "/apparelList/add" class="btn btn-outline-dark" role="button">
+                    <i class="fas fa-plus-circle"></i> Add an Apparel
+                </a>
+                <br>
+                <br>
+        <!-- Table for the database items -->
+        <table class = "table table-bordered table-striped table-hover">
+        <tr>
+            <th class = "text-center col-4">Name</th>
+            <th class = "text-center col-2">Price</th>
+            <th class = "text-center col-2">Description</th>
+            <th class = "text-center col-2">Size</th>
+            <th class = "text-center col-1"></th>
+            <th class = "text-center col-1"></th>
+        </tr>
+        <!-- Repeat the template-->
+        <% for (let count=0; count < apparelList.length; count++) { %>
+            <tr>
+                <td class="text-center col-4"><%= apparelList[count].name %></td>
+                <td class="text-center col-2"><%= apparelList[count].price %></td>
+                <td class="text-center col-2"><%= apparelList[count].description %></td>
+                <td class="text-center col-2"><%= apparelList[count].size %></td>
+                <td class="text-center col-1">
+                    <a href="/apparelList/edit/<%= apparelList[count]._id %>"
+                        class="btn btn-outline-dark">
+                        <i class="fas fa-pencil-alt"></i> Edit 
+                    </a>
+                </td>
+                <td class="text-center col-1">
+                    <a href="/apparelList/delete/<%= apparelList[count]._id %>"
+                        class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Delete 
+                    </a>
+                </td>
+            </tr>
+        <% } %>
+        </table>
+        </div>
+        </div>
+    </div>
+</main>
+<%- include ../partials/bottom_nav.ejs %>
+<%- include ../partials/footer.ejs %>
