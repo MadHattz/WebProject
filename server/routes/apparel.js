@@ -15,6 +15,7 @@ let apparelController = require('../controller/apparel');
 /* Get route for workout list */
 
 router.get('/', apparelController.displayapparelList);
+router.get('/home', apparelController.displayapparelList);
 
 /* Add Operation */
 /* Get route for displaying the Add-Page -- Create Operation*/
