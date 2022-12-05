@@ -30,10 +30,22 @@
           </h5>
           <a class="btn btn-outline-light btn-lg m-2" href="/apparelList"
             role="button">View Apparel Items</a>
+          <% if(typeof displayName=='string' && displayName) { %>
+            <a class="btn btn-outline-light btn-lg m-2" href="/contact"
+             role="button">Need Help?</a>
+          <% } else { %> 
           <a class="btn btn-outline-light btn-lg m-2" href="/login"
              role="button">Member's Login</a>
+          <% } %>
           <br>
-          <p>Members Get An Exclusive Fashion Item. + The Ability To Create Your Very Own Wishlist</p>
+            <% if(typeof displayName=='string' && displayName) { %>
+                <p>Build your own Wishlist</p>
+            <% } else { %> 
+                    <p>Members Get An Exclusive Fashion Item. + The Ability To Create Your Very Own Wishlist</p>
+                    <br>
+                     <a class="btn btn-outline-light btn-lg m-2" href="/register"
+                  role="button">Register Now For Exclusive Benefits</a>
+          <% } %>
         </div>
       </div>
     </div>

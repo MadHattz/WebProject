@@ -8,24 +8,34 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-10">
                 <h1><%= title %></h1>
+                <% if(typeof displayName=='string' && displayName) { %>
                 <a href = "/apparelList/add" class="btn btn-outline-dark" role="button">
                     <i class="fas fa-plus-circle"></i> Add an Apparel
                 </a>
                 <br>
+                <% } %>
                 <br>
         <!-- Table for the database items -->
         <table class = "table table-bordered table-striped table-hover">
         <tr>
+        <% if(typeof displayName=='string' && displayName) { %>
             <th class = "text-center col-4">Name</th>
             <th class = "text-center col-2">Price</th>
             <th class = "text-center col-2">Description</th>
             <th class = "text-center col-2">Size</th>
             <th class = "text-center col-1"></th>
             <th class = "text-center col-1"></th>
+            <% } else { %>
+            <th class = "text-center col-4">Name</th>
+            <th class = "text-center col-2">Price</th>
+            <th class = "text-center col-2">Description</th>
+            <th class = "text-center col-2">Size</th>
+             <% } %>
         </tr>
         <!-- Repeat the template-->
         <% for (let count=0; count < apparelList.length; count++) { %>
             <tr>
+             <% if(typeof displayName=='string' && displayName) { %>
                 <td class="text-center col-4"><%= apparelList[count].name %></td>
                 <td class="text-center col-2"><%= apparelList[count].price %></td>
                 <td class="text-center col-2"><%= apparelList[count].description %></td>
@@ -42,6 +52,12 @@
                         <i class="fas fa-trash-alt"></i> Delete 
                     </a>
                 </td>
+            <% } else { %>
+            <td class="text-center col-4"><%= apparelList[count].name %></td>
+            <td class="text-center col-2"><%= apparelList[count].price %></td>
+            <td class="text-center col-2"><%= apparelList[count].description %></td>
+            <td class="text-center col-2"><%= apparelList[count].size %></td>
+            <% } %>
             </tr>
         <% } %>
         </table>

@@ -1,14 +1,13 @@
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <title>Bootstrap 5 - Login Form</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="app.css" rel="stylesheet" type="text/css"> 
-</head>
-
-<body class="main-bg">
+<%- include ../partials/header.ejs %>
+<%- include ../partials/main_nav.ejs %>
+<main class="container">
+<!--Message Area-->
+    <% if (message.lenth > 0) { %>
+    <div class="alert alter-danger">
+        <%= message %>
+    </div>
+    <% } %>
+  <body class="main-bg">
   <!-- Login Form -->
   <div class="container">
     <div class="row justify-content-center mt-5">
@@ -19,21 +18,36 @@
             <p>Login</p>
           </div>
           <div class="card-body">
-            <form>
+            <form method="post" autocomplete="off">
               <div class="mb-4">
-                <label for="username" class="form-label">Username/Email</label>
-                <input type="text" class="form-control" id="username" />
+                <fieldset class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" placeholder="Enter Username"
+                id="username" required autofocus />
+                </fieldset>
               </div>
               <div class="mb-4">
+              <fieldset class="form-group">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" />
+                <input type="password" class="form-control" id="password"
+                name="password" placeholder="Enter Password" required autofocus/>
+                 <br>
+                or  
+                <br>
+                <a href="/register">  Register Here</a>
+                </fieldset>
               </div>
               <div class="mb-4">
                 <input type="checkbox" class="form-check-input" id="remember" />
                 <label for="remember" class="form-label">Remember Me</label>
               </div>
               <div class="d-grid">
-                <button type="submit" class="btn text-light main-bg">Login</button>
+                <fieldset class="form-group text-right">
+                <button type="submit" class="btn btn-success" value="Login">Login</button>
+                <a href="/">
+                  <input type="button" class="btn btn-warning" value="Cancel">
+                </a>
+                </fieldset>
               </div>
             </form>
           </div>
@@ -42,5 +56,5 @@
     </div>
   </div>
 </body>
-
-</html>
+<%- include ../partials/bottom_nav.ejs %>
+<%- include ../partials/footer.ejs %>

@@ -2,7 +2,7 @@ const e = require('express');
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
-
+let jwt = require('jsonwebtoken');
 
 // connect with Apparel Database
 
@@ -22,7 +22,8 @@ module.exports.displayapparelList = (req,res,next)=>{
             //console.log(apparelList);
             res.render('apparel/list',{
                 title:"Apparels", 
-                apparelList: apparellist
+                apparelList: apparellist,
+                displayName: req.user ? req.user.displayName:''
             });
         }
     });
@@ -30,7 +31,7 @@ module.exports.displayapparelList = (req,res,next)=>{
 
 /* CREATE Display Operartion*/
 module.exports.displayAddPage = (req,res,next)=>{
-    res.render('apparel/add',{title:'Add Apparel'})
+    res.render('apparel/add',{title:'Add Apparel',displayName: req.user ? req.user.displayName:''})
 }
 /* CREATE Process Operartion*/
 module.exports.processAddPage = (req,res,next)=>{
@@ -64,7 +65,8 @@ module.exports.displayEditPage = (req,res,next)=>{
         }
         else
         {
-            res.render('apparel/edit',{title: 'Edit Apparel', apparel:apparelToEdit});
+            res.render('apparel/edit',{title: 'Edit Apparel', apparel:apparelToEdit,
+            displayName: req.user ? req.user.displayName:''});
         }
     });
 }
