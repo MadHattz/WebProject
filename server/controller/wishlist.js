@@ -4,16 +4,15 @@ let router = express.Router();
 let mongoose = require('mongoose');
 let jwt = require('jsonwebtoken');
 
-// connect with Apparel Database
+// connect with Apparel Wish Database
 
-let Apparel = require('../models/apparel');
-const wishlist = require('../models/wishlist');
+let Wish = require('../models/wishlist');
 
 /* CRUD Operartion*/
 
 /* READ Operartion*/
-module.exports.displayapparelList = (req,res,next)=>{
-    Apparel.find((err, apparellist)=>{
+module.exports.displaywishList = (req,res,next)=>{
+    Wish.find((err, wishlist)=>{
         if(err)
         {
             return console.error(err);
@@ -21,9 +20,9 @@ module.exports.displayapparelList = (req,res,next)=>{
         else
         {
             //console.log(apparelList);
-            res.render('apparel/list',{
-                title:"Apparels", 
-                apparelList: apparellist,
+            res.render('wish/wishlist',{
+                title:"Exclusive WishList", 
+                wishList: wishlist,
                 displayName: req.user ? req.user.displayName:'' ,
                 username: req.user ? req.user.username:'',
                 email: req.user ? req.user.email:'',
@@ -34,20 +33,19 @@ module.exports.displayapparelList = (req,res,next)=>{
 
 /* CREATE Display Operartion*/
 module.exports.displayAddPage = (req,res,next)=>{
-    res.render('apparel/add',{title:'Add Apparel',
-    displayName: req.user ? req.user.displayName:'' ,
+    res.render('wish/add',{title:'Add Wish',displayName: req.user ? req.user.displayName:'' ,
     username: req.user ? req.user.username:'',
     email: req.user ? req.user.email:'',})
 }
 /* CREATE Process Operartion*/
 module.exports.processAddPage = (req,res,next)=>{
-    let newApparel = Apparel ({
+    let newWish = Wish ({
         "name":req.body.name,
         "price":req.body.price,
         "description":req.body.description,
         "size":req.body.size
     });
-    Apparel.create(newApparel,(err,Apparel) =>{
+    Wish.create(newWish,(err,Wish) =>{
         if(err)
         {
             console.log(err);
@@ -55,7 +53,7 @@ module.exports.processAddPage = (req,res,next)=>{
         }
         else
         {
-            res.redirect('/apparelList');
+            res.redirect('/wishList');
         }
     });
 }
@@ -63,7 +61,7 @@ module.exports.processAddPage = (req,res,next)=>{
 /* UPDATE Display Operartion*/
 module.exports.displayEditPage = (req,res,next)=>{
     let id = req.params.id;
-    Apparel.findById(id,(err,apparelToEdit)=>{
+    Wish.findById(id,(err,wishToEdit)=>{
         if(err)
         {
             console.log(err);
@@ -71,7 +69,7 @@ module.exports.displayEditPage = (req,res,next)=>{
         }
         else
         {
-            res.render('apparel/edit',{title: 'Edit Apparel', apparel:apparelToEdit,
+            res.render('wish/edit',{title: 'Edit WishList', wish:wishToEdit,
             displayName: req.user ? req.user.displayName:'' ,
             username: req.user ? req.user.username:'',
             email: req.user ? req.user.email:'',});
@@ -81,14 +79,14 @@ module.exports.displayEditPage = (req,res,next)=>{
 /* UPDATE Process Operartion*/
 module.exports.processEditPage = (req,res,next)=>{
     let id = req.params.id;
-    let updateApparel = Apparel({
+    let updateWish = Wish({
         "_id":id,
         "name":req.body.name,
         "price":req.body.price,
         "description":req.body.description,
         "size":req.body.size
     });
-    Apparel.updateOne({_id:id},updateApparel,(err) =>{
+    Wish.updateOne({_id:id},updateWish,(err) =>{
         if(err)
         {
             console.log(err);
@@ -96,15 +94,14 @@ module.exports.processEditPage = (req,res,next)=>{
         }
         else
         {
-            res.redirect('/apparelList');
+            res.redirect('/wishList');
         }
     });
-    
-}
+} 
 /* DELETE Operartion*/
 module.exports.performDelete = (req,res,next)=>{
     let id = req.params.id;
-    Apparel.deleteOne({_id:id},(err) => {
+    Wish.deleteOne({_id:id},(err) => {
         if(err)
         {
             console.log(err);
@@ -112,7 +109,7 @@ module.exports.performDelete = (req,res,next)=>{
         }
         else
         {
-            res.redirect('/apparelList');
+            res.redirect('/wishList');
         }
     });
 }

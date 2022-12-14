@@ -11,6 +11,8 @@ router.get('/home', indexController.displayHomePage);
 
 /* GET contact page. */
 router.get('/contact', indexController.displayContactPage);
+/*Get Display Page */
+router.get('/display',indexController.displayDisplayPage);
 
 
 // Get router for login page

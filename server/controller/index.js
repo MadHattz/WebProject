@@ -9,15 +9,28 @@ let User = userModel.User;
 module.exports.displayHomePage = (req, res, next)=>{
     res.render('index', { 
         title: 'Home',
-        displayName: req.user ? req.user.displayName:''    
+        displayName: req.user ? req.user.displayName:'' ,
+        username: req.user ? req.user.username:'',
+        email: req.user ? req.user.email:'',    
     });
 }
 module.exports.displayContactPage = (req, res, next)=>{
     res.render('index', { 
         title: 'Contact Me',
-        displayName: req.user ? req.user.displayName:''    
+        displayName: req.user ? req.user.displayName:'' ,
+        username: req.user ? req.user.username:'',
+        email: req.user ? req.user.email:'',   
     });
 }
+module.exports.displayDisplayPage = (req, res, next)=>{
+    res.render('index', { 
+        title: 'Display',
+        displayName: req.user ? req.user.displayName:'' ,
+        username: req.user ? req.user.username:'',
+        email: req.user ? req.user.email:'',   
+    });
+}
+
 
 module.exports.displayLoginPage = (req, res,next) => {
     if (!req.user)
@@ -34,7 +47,6 @@ module.exports.displayLoginPage = (req, res,next) => {
         return res.redirect('/')
     }
 }
-
 module.exports.processLoginPage = (req, res, next) => {
     passport.authenticate('local',(err,user, info)=>
     {
@@ -48,7 +60,7 @@ module.exports.processLoginPage = (req, res, next) => {
         {
             req.flash('loginMessage',
             'AuthenticationError');
-            return res.redirect('/');
+            return res.redirect('/login');
         }
         req.login(user,(err) => {
             if(err)
@@ -59,21 +71,14 @@ module.exports.processLoginPage = (req, res, next) => {
             {
                 id: user._id,
                 displayName: user.displayName,
+                password: req.body.password,
                 username: user.username,
                 email: user.email
             }
 
-            // const authToken = jwt.sign(payload, DB.secret, {
-            //     expiresIn: 604800 // 1 week
-            // });
-
-            // // TODO - Getting Ready to convert to API
-            // res.json({success: true, msg: 'User Logged in Successfully!', user: {
-            //     id: user._id,
-            //     displayName: user.displayName,
-            //     username: user.username,
-            //     email: user.email
-            // }, token: authToken});
+             const authToken = jwt.sign(payload, DB.secret, {
+                 expiresIn: 604800 // 1 week
+             });
             return passport.authenticate('local')(req,res,()=>{
                 res.redirect('/');
             })  
@@ -100,7 +105,7 @@ module.exports.displayRegisterPage = (req,res,next)=>{
 module.exports.processRegisterPage = (req,res,next) => {
     let newUser = new User({
         username: req.body.username,
-        //password: req.body.password,
+        password: req.body.password,
         email:req.body.email,
         displayName: req.body.displayName
     })
@@ -125,7 +130,7 @@ module.exports.processRegisterPage = (req,res,next) => {
         //    res.json({success:true, msg:'User registered Successfully'});
             // if registration is successful
             return passport.authenticate('local')(req,res,()=>{
-                res.redirect('/apparelList');
+                res.redirect('/');
             })    
         }
     })

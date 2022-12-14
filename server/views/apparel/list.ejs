@@ -3,22 +3,25 @@
 
 <!-- Main Code-->
 <main>
+<div class="Banner">
+<header >
+    <img src="Assets/images/bricks.jpg" class="img-fluid "style="width: 100%;" alt="Banner Img">
+</header>
+<br>
+</div>
+
     <!-- Main Workout List Page displaying the current workouts entered into the database -->
     <div class="container">
         <div class="row">
             <div class="col-md-offset-3 col-md-10">
-                <h1><%= title %></h1>
-                <% if(typeof displayName=='string' && displayName) { %>
-                <a href = "/apparelList/add" class="btn btn-outline-dark" role="button">
-                    <i class="fas fa-plus-circle"></i> Add an Apparel
-                </a>
+                <h2><%= title %></h2>
                 <br>
-                <% } %>
+                
                 <br>
         <!-- Table for the database items -->
         <table class = "table table-bordered table-striped table-hover">
         <tr>
-        <% if(typeof displayName=='string' && displayName) { %>
+        <% if(typeof displayName=='pop' && displayName) { %>
             <th class = "text-center col-4">Name</th>
             <th class = "text-center col-2">Price</th>
             <th class = "text-center col-2">Description</th>
@@ -35,7 +38,8 @@
         <!-- Repeat the template-->
         <% for (let count=0; count < apparelList.length; count++) { %>
             <tr>
-             <% if(typeof displayName=='string' && displayName) { %>
+            <!--You can no longer make changes to the apperal db in the final release, only on members Exclusive db-->
+             <% if(typeof displayName=='pop' && displayName) { %>
                 <td class="text-center col-4"><%= apparelList[count].name %></td>
                 <td class="text-center col-2"><%= apparelList[count].price %></td>
                 <td class="text-center col-2"><%= apparelList[count].description %></td>
@@ -64,6 +68,44 @@
         </div>
         </div>
     </div>
+<br>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Account Settings</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table class = "table table-bordered table-striped table-hover">
+        <tr>
+            <th class = "text-center col-2">Username</th>
+            <th class = "text-center col-2">Display name</th>
+            <th class = "text-center col-2">Email</th>
+        </tr>
+        <tr>
+            <td class="text-center col-2"><%= username %></td>
+            <td class="text-center col-2"><%= displayName %></td>
+            <td class="text-center col-2"><%= email %></td>
+        </tr>
+    </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal Code Ends-->
+<!--Footer Banner Img-->
+<div class="Banner">
+<footer >
+    <img src="Assets/images/hype.jpg" class="img-fluid "style="width: 100%;" alt="Banner Img">
+</footer>
+</div>
+<br>
 </main>
 <%- include ../partials/bottom_nav.ejs %>
 <%- include ../partials/footer.ejs %>

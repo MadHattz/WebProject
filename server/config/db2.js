@@ -1,6 +1,6 @@
 module.exports = 
 { /* Link to Connect Real-time MongoDB cloud databse to website */
-    URI: "mongodb+srv://hamdo1236:hamdo1236@cluster0.x7avuok.mongodb.net/?retryWrites=true&w=majority",
+    URI2: "mongodb+srv://pan:7nmxnfwrpLkiyDaN@pancakes.wpib5mv.mongodb.net/test",
     "secret":"SomeSecret"
     
 }

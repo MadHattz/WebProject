@@ -6,6 +6,7 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let session = require('express-session');
 let passport = require('passport');
+
 //JWT
 let passportJWT = require('passport-jwt');
 let JWTStrategy = passportJWT.Strategy;
@@ -23,6 +24,10 @@ let User = userModel.User;
 // config mongoDB
 let mongoose = require('mongoose');
 let DB = require('./db');
+let DB2 = require('./db2');
+//config mongoDB for wishlist page
+let mongoose1 = require('mongoose');
+
 
 // point mongoose to DB URI
 
@@ -30,6 +35,12 @@ mongoose.connect(DB.URI);
 let mongDB = mongoose.connection;
 mongDB.on('error',console.error.bind(console,'Connection Error:'));
 mongDB.once('open', ()=> {
+  console.log('Connected to the MongoDB');
+});
+mongoose.createConnection(DB2.URI2);
+let mongDB1 = mongoose.connection;
+mongDB1.on('error',console.error.bind(console,'Connection Error:'));
+mongDB1.once('open', ()=> {
   console.log('Connected to the MongoDB');
 });
 
@@ -42,6 +53,7 @@ app.use(session({
 
 // implement a User Authentication
 passport.use(User.createStrategy());
+
 
 // serialize and deserialze the user information
 passport.serializeUser(User.serializeUser());
@@ -58,7 +70,7 @@ app.use(flash());
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
 let apparelRouter = require('../routes/apparel');
-
+let wishRouter = require('../routes/wishlist');
 
 
 // view engine setup
@@ -72,6 +84,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
+// verify that the token sent by the user - check if valid
 let jwtoptions = {};
 jwtoptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
 jwtoptions.secretOrKey = DB.secret;
@@ -81,6 +94,7 @@ app.use('/', indexRouter);
 
 app.use('/users', usersRouter);
 app.use('/apparelList', apparelRouter);
+app.use('/wishList', wishRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

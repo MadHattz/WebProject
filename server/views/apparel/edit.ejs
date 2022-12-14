@@ -56,7 +56,7 @@
             <button class="btn btn-outline-dark" type="submit">
                 <i class="fas fa-edit"></i> Submit 
             </button>
-            <!-- Button to Submit New Database Item -->
+            <!-- Button to Cancel New Database Item -->
             <a href="/apparelList" class="btn btn-outline-danger">
                 Cancel
             </a>
@@ -66,6 +66,36 @@
     </div>
     </div>
  </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Account Settings</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table class = "table table-bordered table-striped table-hover">
+        <tr>
+            <th class = "text-center col-2">Username</th>
+            <th class = "text-center col-2">Display name</th>
+            <th class = "text-center col-2">Email</th>
+        </tr>
+        <tr>
+            <td class="text-center col-2"><%= username %></td>
+            <td class="text-center col-2"><%= displayName %></td>
+            <td class="text-center col-2"><%= email %></td>
+        </tr>
+    </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal Code Ends-->
+
 
 <%- include ../partials/bottom_nav.ejs %>
 <%- include ../partials/footer.ejs %>

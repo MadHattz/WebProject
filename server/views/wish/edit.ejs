@@ -1,7 +1,7 @@
 <%- include ../partials/header.ejs %>
-<%- include ../partials/add.ejs %>
+<%- include ../partials/edit.ejs %>
 <br>
- <!-- Content for the Add page -->
+ <!-- Content for the Edit page -->
  <div class="container">
     <div class="row">
     <div class="col-md-offset-3 col-md-6">
@@ -9,11 +9,13 @@
         <form class="form" method="post">
             <!-- Content Field for Name -->
             <div class="form-group">
-                <label for="nameTextField">Apparel Name</label>
+                <label for="nameTextField">Apperal Name</label>
                 <input type="text" class="form-control" 
                 id="nameTextField" 
-                placeholder="Enter the Apparel name" 
-                name="name" required>
+                placeholder="Enter the wish name" 
+                name="name" 
+                value="<%= wish.name %>"
+                required>
             </div>
             <br>
             <!-- Content Field for Price -->
@@ -22,7 +24,9 @@
                 <input type="text" class="form-control" 
                 id="priceTextField" 
                 placeholder="Enter the Price Tag" 
-                name="price" required>
+                name="price" 
+                value="<%= wish.price %>"
+                required>
             </div>
             <br>
             <!-- Content Field for Description -->
@@ -31,7 +35,9 @@
                 <input type="text" class="form-control" 
                 id="descriptionTextField" 
                 placeholder="Enter product description" 
-                name="description" required>
+                name="description" 
+                value="<%= wish.description %>"
+                required>
             </div>
             <br>
             <!-- Content Field for Size -->
@@ -40,7 +46,9 @@
                 <input type="text" class="form-control" 
                 id="sizeTextField" 
                 placeholder="Enter your size" 
-                name="size" required>
+                name="size" 
+                value="<%= wish.size %>"
+                required>
             </div>
             
             <br>
@@ -48,8 +56,8 @@
             <button class="btn btn-outline-dark" type="submit">
                 <i class="fas fa-edit"></i> Submit 
             </button>
-            <!-- Button to Cancel New Database Item -->
-            <a href="/apparelList" class="btn btn-outline-danger">
+            <!-- Button to Submit New Database Item -->
+            <a href="/wishList" class="btn btn-outline-danger">
                 Cancel
             </a>
 
@@ -87,7 +95,6 @@
   </div>
 </div>
 <!--Modal Code Ends-->
-
 
 <%- include ../partials/bottom_nav.ejs %>
 <%- include ../partials/footer.ejs %>
