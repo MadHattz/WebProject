@@ -23,3 +23,6 @@ Release 1: Site Deployed Originally on Heroku
 
 Release 2: Heroku site down, redeployed on Digital Ocean
 Added Login/Register Capabilities & User Authentication 
+
+Final Release:
+Site Functionality Complete
